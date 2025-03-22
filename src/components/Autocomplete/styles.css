@@ -1,0 +1,41 @@
+.autoComplete {
+  position: relative;
+  width: 350px;
+}
+
+.suggestions {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-height: 300px;
+  min-height: 40px;
+  overflow-y: auto;
+  background-color: white;
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  list-style: none;
+  margin-left: 0rem;
+  margin-top: 3px;
+  padding: 0;
+}
+
+.emptySuggestions {
+  padding: 10px;
+}
+
+.suggestion {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
+}
+
+.suggestion:hover {
+  background-color: #f0f0f0;
+}
+
+.highlight {
+  font-weight: bold;
+  color: #007bff;
+}
+
+

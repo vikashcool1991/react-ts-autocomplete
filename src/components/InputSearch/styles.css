@@ -1,0 +1,47 @@
+.input {
+  width: 100%;
+  padding: 10px 0px 10px 35px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.leadingIconWrapper {
+  position: absolute;
+}
+
+.leadingIcon {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 9px;
+  left: 8px;
+  > path {
+    fill: #74767c;
+  }
+}
+
+.trailingIconWrapper {
+  position: relative;
+  float: right;
+}
+
+.trailingIconWrapper:hover {
+  cursor: pointer;
+  > svg > path {
+    fill: black;
+  }
+}
+
+.trailingIcon {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: -30px;
+  > path {
+    fill: #74767c;
+  }
+}
+
+.inputWrapper {
+}
