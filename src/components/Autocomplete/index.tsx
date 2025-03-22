@@ -5,15 +5,11 @@ import { ChangeEventType, MouseEventType } from "../../types";
 import fetchTodoSuggestions from "../../requests/fetchTodoSuggestions";
 import useQuery from "../../hooks/useQuery";
 import useClickAway from "../../hooks/useClickAway";
-import "./styles.css";
-import {
-  LOADING,
-  NO_TODOS_FOUND,
-  SEARCH_TODOS_PLACEHOLDER,
-  SUGGESTIONS_ERROR,
-} from "../../constants/autocomplete";
+import { SEARCH_TODOS_PLACEHOLDER } from "../../constants/autocomplete";
 import { useTodosDispatch } from "../../providers/todos";
 import { setFetchTodos } from "../../providers/todos/actions";
+import SuggestionsList from "./SuggestionsList";
+import "./styles.css";
 
 const AutoComplete: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>("");
@@ -45,19 +41,6 @@ const AutoComplete: React.FC = () => {
   const handleChange = (event: ChangeEventType) => {
     setInputValue(event.target.value);
     setShowSuggestions(true);
-  };
-
-  const highlightText = (text: string) => {
-    const parts = text.split(new RegExp(`(${inputValue})`, "gi"));
-    return parts.map((part, index) =>
-      part.toLowerCase() === inputValue.toLowerCase() ? (
-        <strong key={index} className="highlight">
-          {part}
-        </strong>
-      ) : (
-        part
-      )
-    );
   };
 
   const onClear = () => {
@@ -98,30 +81,14 @@ const AutoComplete: React.FC = () => {
         onFocus={onFocus}
         onEnter={onEnter}
       />
-      {isFetching ? (
-        <div className="loader">{LOADING}</div>
-      ) : (
-        suggestions &&
-        showSuggestions && (
-          <ul className="suggestions">
-            {suggestions.length ? (
-              suggestions.map((suggestion, index) => (
-                <li
-                  key={index}
-                  className="suggestion"
-                  onClick={(e) => onSuggestionSelect(e, suggestion)}
-                >
-                  {highlightText(suggestion)}
-                </li>
-              ))
-            ) : (
-              <li className="emptySuggestions">
-                {error ? SUGGESTIONS_ERROR : NO_TODOS_FOUND}
-              </li>
-            )}
-          </ul>
-        )
-      )}
+      <SuggestionsList
+        isFetching={isFetching}
+        suggestions={suggestions}
+        showSuggestions={showSuggestions}
+        onSuggestionSelect={onSuggestionSelect}
+        inputValue={inputValue}
+        error={error}
+      />
     </div>
   );
 };

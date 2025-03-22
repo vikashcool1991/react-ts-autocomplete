@@ -48,3 +48,15 @@ export interface ErrorBoundaryState {
   hasError: boolean;
   error: Error | null;
 }
+
+export interface ISuggestionsListProps {
+  isFetching: boolean;
+  suggestions: string[];
+  showSuggestions: boolean;
+  onSuggestionSelect: (
+    event: React.MouseEvent<HTMLLIElement>,
+    suggestion: string
+  ) => void;
+  inputValue: string;
+  error: Error | null;
+}
