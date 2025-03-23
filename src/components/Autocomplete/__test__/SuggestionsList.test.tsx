@@ -1,6 +1,10 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import SuggestionsList from "../SuggestionsList";
-import { LOADING, NO_TODOS_FOUND, SUGGESTIONS_ERROR } from "../../../constants/autocomplete";
+import {
+  LOADING,
+  NO_TODOS_FOUND,
+  SUGGESTIONS_ERROR,
+} from "../../../constants/autocomplete";
 
 describe("SuggestionsList Component", () => {
   const mockOnSuggestionSelect = jest.fn();
@@ -29,7 +33,7 @@ describe("SuggestionsList Component", () => {
       />
     );
     expect(screen.getByText(NO_TODOS_FOUND)).toBeInTheDocument();
-    expect(screen.getByRole("listitem")).toHaveClass("emptySuggestions");
+    expect(screen.getByRole("alert")).toHaveClass("emptySuggestions");
   });
 
   it("renders error message when there are no suggestions and error is true", () => {
@@ -42,7 +46,7 @@ describe("SuggestionsList Component", () => {
       />
     );
     expect(screen.getByText(SUGGESTIONS_ERROR)).toBeInTheDocument();
-    expect(screen.getByRole("listitem")).toHaveClass("emptySuggestions");
+    expect(screen.getByRole("alert")).toHaveClass("emptySuggestions");
   });
 
   it("renders suggestions when suggestions are provided", () => {
@@ -55,7 +59,7 @@ describe("SuggestionsList Component", () => {
         inputValue="Task"
       />
     );
-    const suggestionItems = screen.getAllByRole("listitem");
+    const suggestionItems = screen.getAllByRole("option");
     expect(suggestionItems).toHaveLength(suggestions.length);
     expect(suggestionItems[0]).toHaveTextContent("Task 1");
     expect(suggestionItems[1]).toHaveTextContent("Task 2");
@@ -72,6 +76,27 @@ describe("SuggestionsList Component", () => {
     );
     const suggestionItem = screen.getByText("Task 1");
     fireEvent.click(suggestionItem);
+    expect(mockOnSuggestionSelect).toHaveBeenCalledWith(
+      expect.anything(),
+      "Task 1"
+    );
+  });
+
+  it("calls onSuggestionSelect when a Enter key is pressed", () => {
+    const suggestions = ["Task 1"];
+    render(
+      <SuggestionsList
+        {...defaultProps}
+        showSuggestions={true}
+        suggestions={suggestions}
+      />
+    );
+    const suggestionItem = screen.getByText("Task 1");
+    fireEvent.keyDown(suggestionItem, {
+      key: "Enter",
+      code: "Enter",
+      charCode: 13,
+    });
     expect(mockOnSuggestionSelect).toHaveBeenCalledWith(
       expect.anything(),
       "Task 1"

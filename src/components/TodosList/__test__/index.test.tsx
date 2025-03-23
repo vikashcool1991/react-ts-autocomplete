@@ -20,8 +20,8 @@ describe("TodosList Component", () => {
 
   it("should render nothing if there are no todos", () => {
     stateSpy.mockReturnValue({ todos: [] });
-    const { container } = setup();
-    expect(container.firstChild).toBeNull();
+    setup();
+    expect(screen.getByRole("alert")).toBeInTheDocument();
   });
 
   it("should render a table with todos if todos exist", () => {

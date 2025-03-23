@@ -10,7 +10,7 @@ describe("App Component", () => {
 
     test("renders the AutoComplete component", () => {
         render(<App />);
-        const autoCompleteElement = screen.getByRole("textbox");
+        const autoCompleteElement = screen.getByRole("search");
         expect(autoCompleteElement).toBeInTheDocument();
     });
 });

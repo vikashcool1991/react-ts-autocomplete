@@ -47,7 +47,7 @@ describe("AutoComplete Component", () => {
     fireEvent.change(input, { target: { value: "Todo" } });
 
     await waitFor(() => {
-      const suggestionsList = screen.getByRole("list");
+      const suggestionsList = screen.getByRole("listbox");
       expect(suggestionsList).toBeInTheDocument();
     });
   });
