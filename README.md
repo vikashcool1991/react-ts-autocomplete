@@ -1,5 +1,35 @@
 # Autocomplete app for todos
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Installation](#installation)
+- [Scripts](#scripts)
+- [Testing](#testing)
+  - [Running Tests](#running-tests)
+  - [Test Coverage](#test-coverage)
+  - [Test Coverage Threshold](#test-coverage-threshold)
+- [Project Structure](#project-structure)
+- [Usage](#usage)
+- [Accessibility (a11y)](#accessibility-a11y)
+  - [General Accessibility Features](#general-accessibility-features)
+  - [Component-Specific Accessibility Features](#component-specific-accessibility-features)
+    - [Autocomplete](#autocomplete)
+    - [Todos List](#todos-list)
+    - [Input Search](#input-search)
+  - [Accessibility Testing](#accessibility-testing)
+- [API Integration](#api-integration)
+- [Custom Hooks](#custom-hooks)
+  - [useDebounce](#usedebounce)
+  - [useClickAway](#useclickaway)
+  - [useQuery](#usequery)
+- [Edge Cases Handled](#edge-cases-handled)
+- [Styling](#styling)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
+
 ## Overview
 
 This project is a React TypeScript application that provides an autocomplete feature for managing a list of todos. This application designed to provide a smooth and efficient user experience. Users can type into an input field to search and select from a list of predefined todo items. The app highlights matching text, handles edge cases, and uses asynchronous data fetching to simulate real-world REST API calls.
@@ -15,6 +45,8 @@ This project is a React TypeScript application that provides an autocomplete fea
 - **Pure React Implementation**: No third-party libraries are used for state management or UI components.
 - Built with React and TypeScript for type safety and scalability.
 - Modular and reusable components.
+- **Test coverage**: Includes comprehensive unit and integration tests to ensure the functionality and reliability of the application. The tests are written using [Jest](https://jestjs.io/).
+- **Accessibility**: Includes general accessibility features like `Semantic HTML`, `Keyboard Navigation`, `ARIA Roles and Attributes`.
 
 ## Installation
 
@@ -52,7 +84,7 @@ This project is a React TypeScript application that provides an autocomplete fea
 
 ## Testing
 
-This project includes comprehensive unit and integration tests to ensure the functionality and reliability of the application. The tests are written using [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/).
+This project includes comprehensive unit and integration tests to ensure the functionality and reliability of the application. The tests are written using [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/). All tests are written in `__test__` directory under respective components and utils directory.
 
 ### Running Tests
 
@@ -182,6 +214,48 @@ react-ts-autocomplete/
 2. Suggestions will be fetched asynchronously and displayed in a dropdown.
 3. Matching parts of the suggestions will be highlighted.
 4. Select a suggestion by clicking on it or using the keyboard.
+
+## Accessibility (a11y)
+
+This project is designed with accessibility in mind to ensure a better user experience for everyone, including users relying on assistive technologies. Below are the key accessibility features implemented in the app:
+
+### General Accessibility Features
+
+- **Semantic HTML**: The app uses semantic HTML elements such as `<main>`, `<table>`, `<thead>`, `<tbody>`, `<th>`, and `<tr>` to provide meaningful structure to the content.
+- **Keyboard Navigation**: All interactive elements, such as the autocomplete input, suggestions list, and todos table, are fully keyboard-accessible.
+- **ARIA Roles and Attributes**: The app uses appropriate ARIA roles and attributes to enhance accessibility for screen readers:
+  - `role="combobox"` for the autocomplete wrapper.
+  - `aria-expanded`, `aria-owns`, and `aria-haspopup` for the autocomplete input to indicate the state of the suggestions list.
+  - `role="listbox"` and `role="option"` for the suggestions list and its items.
+  - `aria-live="polite"` for dynamically updating content like the todos list and suggestions.
+
+### Component-Specific Accessibility Features
+
+#### **Autocomplete**
+
+- **Keyboard Support**: Users can navigate suggestions using the `ArrowUp` and `ArrowDown` keys and select a suggestion with the `Enter` key.
+- **Focus Management**: Focus is automatically returned to the input field after selecting a suggestion.
+- **Live Region**: The number of suggestions or error messages is announced to screen readers using an ARIA live region (`aria-live="polite"`).
+- **Highlighting**: Matching parts of suggestions are visually highlighted for better usability.
+
+#### **Todos List**
+
+- **Table Accessibility**: The todos list is rendered as a semantic table with proper `<thead>`, `<tbody>`, and `<th>` elements.
+- **Row Headers**: The `id` column is marked with `scope="row"` to associate row data with its header.
+- **Empty State**: Displays a message (`role="alert"`) when no todos are available, ensuring screen readers announce the state.
+
+#### **Input Search**
+
+- **Accessible Input**: The search input uses `aria-autocomplete="list"` and `aria-controls` to associate it with the suggestions list.
+- **Clear Button**: The clear button is implemented as a `<button>` element with `aria-label="Clear input"` for screen reader users.
+
+### Accessibility Testing
+
+The app has been tested for accessibility using:
+
+- **Keyboard Navigation**: Verified that all interactive elements are accessible via the keyboard.
+- **Screen Readers**: Tested with screen readers to ensure proper announcements of dynamic content.
+- **Lighthouse**: Used Lighthouse audits to ensure compliance with accessibility best practices.
 
 ## API Integration
 
