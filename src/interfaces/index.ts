@@ -17,10 +17,10 @@ export interface UseQueryResult<T> {
 }
 
 export interface ITodo {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
+  userId?: number;
+  id?: number;
+  title?: string;
+  completed?: boolean;
 }
 
 export interface ITodosState {
@@ -54,7 +54,7 @@ export interface ISuggestionsListProps {
   suggestions: string[];
   showSuggestions: boolean;
   onSuggestionSelect: (
-    event: React.MouseEvent<HTMLLIElement>,
+    event: React.MouseEvent<HTMLLIElement> | React.KeyboardEvent<HTMLLIElement>,
     suggestion: string
   ) => void;
   inputValue: string;

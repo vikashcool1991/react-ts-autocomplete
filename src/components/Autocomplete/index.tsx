@@ -62,17 +62,25 @@ const AutoComplete: React.FC = () => {
   };
 
   const onSuggestionSelect = (
-    _event: MouseEventType,
+    _event: MouseEventType | React.KeyboardEvent<HTMLLIElement>,
     selectedSuggestion: string
   ) => {
     setInputValue(selectedSuggestion);
     setShowSuggestions(false);
     setSelected(selectedSuggestion);
     dispatch?.(setFetchTodos(selectedSuggestion, true));
+    // document.querySelector("input")?.focus(); // Move focus back to the input
   };
 
   return (
-    <div className="autoComplete" ref={ref}>
+    <div
+      className="autoComplete"
+      ref={ref}
+      role="combobox"
+      aria-expanded={showSuggestions}
+      aria-owns="suggestions-list"
+      aria-haspopup="listbox"
+    >
       <InputSearch
         placeholder={SEARCH_TODOS_PLACEHOLDER}
         onChange={handleChange}

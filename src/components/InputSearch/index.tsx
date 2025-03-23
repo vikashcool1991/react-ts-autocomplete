@@ -12,9 +12,9 @@ const InputSearch = ({
   onEnter,
 }: InputSearchProps) => {
   return (
-    <div className="inputWrapper">
-      <span className="leadingIconWrapper">
-        <SearchIcon className="leadingIcon" />
+    <div className="inputWrapper" role="search">
+      <span className="leadingIconWrapper" aria-hidden="true">
+        <SearchIcon className="leadingIcon" data-testid="search-icon" />
       </span>
       <input
         type="text"
@@ -24,11 +24,23 @@ const InputSearch = ({
         onKeyDown={onEnter}
         placeholder={placeholder || "Search..."}
         className="input"
+        aria-autocomplete="list"
+        aria-label="Search"
+        aria-describedby="Search input box"
+        aria-expanded={!!value} // true if suggestions are visible
+        aria-controls="suggestions-list"
+        role="combobox"
       />
       {value ? (
-        <span className="trailingIconWrapper" onClick={onClear}>
-          <CancelIcon className="trailingIcon" />
-        </span>
+        <button
+          className="trailingIconWrapper"
+          onClick={onClear}
+          aria-label="clear input button"
+          data-testid="clear-button"
+          role="button"
+        >
+          <CancelIcon className="trailingIcon" data-testid="cancel-icon" />
+        </button>
       ) : null}
     </div>
   );

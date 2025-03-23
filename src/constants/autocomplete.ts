@@ -5,3 +5,4 @@ export const SEARCH_TODOS_PLACEHOLDER = "Search todos...";
 export const ERROR_BOUNDARY_MESSAGE =
   "Something went wrong! Please try again later.";
 export const ERROR_BOUNDARY_MESSAGE_LOG = "Error caught by ErrorBoundary:";
+export const AUTO_COMPLETE_HEADING = "React TS Autocomplete";

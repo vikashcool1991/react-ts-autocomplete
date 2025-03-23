@@ -1,16 +1,19 @@
 import "./App.css";
 import AutoComplete from "./components/Autocomplete";
 import TodosList from "./components/TodosList";
+import { AUTO_COMPLETE_HEADING } from "./constants/autocomplete";
 import TodosProvider from "./providers/todos";
 
 function App() {
   return (
     <TodosProvider>
-      <div className="app">
-        <h1>React TS Autocomplete</h1>
+      <main className="app" role="main">
+        <h1>{AUTO_COMPLETE_HEADING}</h1>
         <AutoComplete />
-        <TodosList />
-      </div>
+        <div aria-live="polite">
+          <TodosList />
+        </div>
+      </main>
     </TodosProvider>
   );
 }

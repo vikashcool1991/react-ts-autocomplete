@@ -1,6 +1,7 @@
 .autoComplete {
   position: relative;
-  width: 350px;
+  min-width: 350px;
+  width: auto;
 }
 
 .suggestions {

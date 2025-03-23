@@ -24,6 +24,10 @@
 .trailingIconWrapper {
   position: relative;
   float: right;
+  bottom: 32px;
+  right: -32px;
+  border: none;
+  background: none;
 }
 
 .trailingIconWrapper:hover {
@@ -36,8 +40,6 @@
 .trailingIcon {
   width: 20px;
   height: 20px;
-  position: absolute;
-  top: -30px;
   > path {
     fill: #74767c;
   }

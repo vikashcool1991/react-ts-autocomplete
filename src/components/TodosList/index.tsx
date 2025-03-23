@@ -7,29 +7,31 @@ const TodosList = () => {
   const todosState = useTodosState();
   const todos = todosState?.todos ?? [];
   if (!todos.length) {
-    return null;
+    return <p role="alert">No todos available.</p>;
   }
   return (
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {todos.map((todo: ITodo) => (
-            <tr key={todo.id}>
-              <td>{todo.id || "-"}</td>
-              <td>{todo.title || "-"}</td>
-              <td>{todo.completed ? "Completed" : "Pending"}</td>
+    <table role="table" aria-label="List of todos">
+      <caption>List of Todos</caption>
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Title</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {todos.map((todo: ITodo, index) => {
+          const { id, title, completed } = todo ?? {};
+          return (
+            <tr key={id || index} tabIndex={0}>
+              <td scope="row">{id || "-"}</td>
+              <td>{title || "-"}</td>
+              <td>{completed ? "Completed" : "Pending"}</td>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          );
+        })}
+      </tbody>
+    </table>
   );
 };
 

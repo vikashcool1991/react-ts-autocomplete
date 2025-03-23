@@ -50,6 +50,41 @@ This project is a React TypeScript application that provides an autocomplete fea
 - `npm run test`: Launches the test runner.
 - `npm run build`: Builds the app for production.
 
+## Testing
+
+This project includes comprehensive unit and integration tests to ensure the functionality and reliability of the application. The tests are written using [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/).
+
+### Running Tests
+
+To run the tests, use the following command:
+
+```bash
+npm run test
+```
+
+This will execute all test files and display the results in the terminal.
+
+### Test Coverage
+
+To generate a test coverage report, run:
+
+```bash
+npm run coverage
+```
+
+This will create a `coverage` folder in the root directory. Open the `index.html` file in the `coverage/lcov-report` folder to view the coverage report in your browser:
+
+```bash
+open coverage/lcov-report/index.html
+```
+
+### Test Coverage Threshold
+
+- **Statements**: >90%
+- **Branches**: >80%
+- **Functions**: >90%
+- **Lines**: >90%
+
 ## Project Structure
 
 ```bash
@@ -65,46 +100,72 @@ react-ts-autocomplete/
 ├── src
 │   ├── App.css
 │   ├── App.tsx
+│   ├── __test__
+│   │   └── App.test.tsx
 │   ├── assets
-│   ├── components          # Reusable React components
-│   │   ├── Autocomplete    # Main autocomplete component
+│   ├── components
+│   │   ├── Autocomplete
+│   │   │   ├── SuggestionsList.tsx
+│   │   │   ├── __test__
+│   │   │   │   ├── SuggestionsList.test.tsx
+│   │   │   │   └── index.test.tsx
 │   │   │   ├── index.tsx
 │   │   │   └── styles.css
-│   │   ├── ErrorBoundary   # Error boundary for graceful error handling
+│   │   ├── ErrorBoundary
+│   │   │   ├── __test__
+│   │   │   │   └── index.test.tsx
 │   │   │   └── index.tsx
 │   │   ├── Icons
 │   │   │   ├── Cancel.tsx
 │   │   │   └── Search.tsx
 │   │   ├── InputSearch
+│   │   │   ├── __test__
+│   │   │   │   └── index.test.tsx
 │   │   │   ├── index.tsx
 │   │   │   └── styles.css
 │   │   └── TodosList
+│   │       ├── __test__
+│   │       │   └── index.test.tsx
 │   │       ├── index.tsx
 │   │       └── styles.css
-│   ├── constants           # constants
+│   ├── constants
 │   │   ├── autocomplete.ts
 │   │   ├── requests.ts
 │   │   └── todoList.ts
-│   ├── hooks               # Custom hooks
-│   │   ├── useClickAway.ts # Custom hook detect outside click
-│   │   ├── useDebounce.ts  # Custom hook for debouncing input
-│   │   └── useQuery.ts     # Custom hook for fetching api asynchronously
+│   ├── hooks
+│   │   ├── __test__
+│   │   │   ├── useClickAway.test.ts
+│   │   │   ├── useDebounce.test.ts
+│   │   │   └── useQuery.test.ts
+│   │   ├── useClickAway.ts
+│   │   ├── useDebounce.ts
+│   │   └── useQuery.ts
 │   ├── index.css
-│   ├── interfaces          # List of interfaces
+│   ├── interfaces
 │   │   └── index.ts
 │   ├── main.tsx
 │   ├── providers
-│   │   └── todos           # Todo context provider
+│   │   └── todos
+│   │       ├── __test__
+│   │       │   ├── actions.test.ts
+│   │       │   └── reducer.test.ts
 │   │       ├── actions.ts
 │   │       ├── constants.ts
 │   │       ├── index.tsx
 │   │       └── reducer.ts
-│   ├── requests            # Fetch API's
+│   ├── requests
+│   │   ├── __test__
+│   │   │   ├── fetchTodoSuggestions.test.ts
+│   │   │   └── fetchTodos.test.ts
 │   │   ├── fetchTodoSuggestions.ts
 │   │   └── fetchTodos.ts
 │   ├── types
 │   │   └── index.ts
-│   ├── utils               # Utility functions
+│   ├── utils
+│   │   ├── __test__
+│   │   │   ├── fetchSafe.test.ts
+│   │   │   ├── filterTodos.test.ts
+│   │   │   └── filteredSuggestions.test.ts
 │   │   ├── fetchSafe.ts
 │   │   ├── filterTodos.ts
 │   │   └── filteredSuggestions.ts
